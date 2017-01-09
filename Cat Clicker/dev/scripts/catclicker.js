@@ -1,7 +1,11 @@
-/* ================================================================ */
-/* MODELS                                                           */
-/* ================================================================ */
+/**
+ * Javascript for the catclicker app, set out in a MVC style
+ * @author Jack Gammon
+ */
 var catClicker = (function () {
+    /* ================================================================ */
+    /* MODELS                                                           */
+    /* ================================================================ */
     var model = {
         data: [
             {
@@ -89,12 +93,18 @@ var catClicker = (function () {
             var photo = document.getElementById("catPhoto");
             photo.src = activeCat.imageSrc;
             this.updateClicker(activeCat.counter);
-            document.getElementById("formAdminArea").hidden = ! octopus.getAdminDisplayStatus();
+            
+            document.getElementById("formAdminArea").hidden = !octopus.getAdminDisplayStatus();
+            document.getElementById("catNameTextbox").value = activeCat.name;
+            document.getElementById("catPhotoTextbox").value = activeCat.imageSrc;
+            document.getElementById("catTickerTextbox").value = activeCat.counter;
+
         },
         // Sets the clicker on screen to the given value
         updateClicker: function (value) {
             document.getElementById("catTicker").innerText = value;
         }
+
     }
 
     /* ================================================================ */
@@ -133,12 +143,17 @@ var catClicker = (function () {
             model.data[model.selectedCat].counter += 1;
             catAreaView.updateClicker(model.data[model.selectedCat].counter);
         },
+        // Toggles the admin display, and calls the render method to redraw the view
         toggleAdminDisplay: function () {
             model.adminOpen = !model.adminOpen;
             catAreaView.render();
         },
-        getAdminDisplayStatus: function() {
+        // Get the current 'open' status for the admin screen
+        getAdminDisplayStatus: function () {
             return model.adminOpen;
+        },
+        cancelAdmin: function () {
+
         }
     };
     // kick everything off (:
