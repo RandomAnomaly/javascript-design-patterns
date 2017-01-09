@@ -2,7 +2,6 @@
 /* MODELS                                                           */
 /* ================================================================ */
 var catClicker = (function () {
-
     var model = {
         data: [
             {
@@ -74,10 +73,13 @@ var catClicker = (function () {
 
     // View for the main display area
     var catAreaView = {
-        // Initialise the view - all this really does is attach the event listener to the image
+        // Initialise the view - binding etc
         init: function () {
             document.getElementById("catPhoto").addEventListener('click', function () {
                 octopus.incrementClicker();
+            });
+            document.getElementById("adminButton").addEventListener('click', function () {
+                octopus.toggleAdminDisplay();
             });
         },
         // Render the currently selected cat, updates the name, clicker and photo from the json
@@ -87,6 +89,7 @@ var catClicker = (function () {
             var photo = document.getElementById("catPhoto");
             photo.src = activeCat.imageSrc;
             this.updateClicker(activeCat.counter);
+            document.getElementById("formAdminArea").hidden = ! octopus.getAdminDisplayStatus();
         },
         // Sets the clicker on screen to the given value
         updateClicker: function (value) {
@@ -129,6 +132,13 @@ var catClicker = (function () {
         incrementClicker: function () {
             model.data[model.selectedCat].counter += 1;
             catAreaView.updateClicker(model.data[model.selectedCat].counter);
+        },
+        toggleAdminDisplay: function () {
+            model.adminOpen = !model.adminOpen;
+            catAreaView.render();
+        },
+        getAdminDisplayStatus: function() {
+            return model.adminOpen;
         }
     };
     // kick everything off (:
