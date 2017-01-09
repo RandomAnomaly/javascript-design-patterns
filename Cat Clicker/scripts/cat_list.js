@@ -20,7 +20,7 @@ var cats = [
         "counter": 0
     },
     {
-        "name": "Catrhito",
+        "name": "Burrcato",
         "imageSrc": "bin/cat5.jpg",
         "counter": 0
     }
