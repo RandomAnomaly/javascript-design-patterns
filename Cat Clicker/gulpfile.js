@@ -10,7 +10,7 @@ var gulp = require('gulp'),
 
 
 // Default task
-gulp.task('default', ['clean'], function(){
+gulp.task('default', ['clean'], function () {
     gulp.start('uglify', 'copy-images');
 });
 
@@ -36,7 +36,7 @@ gulp.task('jshint', function () {
 gulp.task('uglify', ['jshint'], function () {
     return gulp.src('./dev/**/*.html')
         .pipe(usemin({
-            css: [minifycss(),rev()],
+            css: [minifycss(), rev()],
             js: [uglify(), rev()]
         }))
         .pipe(gulp.dest('dist/'));
@@ -53,7 +53,7 @@ gulp.task('watch', ['browser-sync'], function () {
 });
 
 // sync
-gulp.task('browser-sync', ['default'], function(){
+gulp.task('browser-sync', ['default'], function () {
     var files = [
         './dev/**/*.html',
         './dev/styles/**/*.css',
