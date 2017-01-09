@@ -34,9 +34,9 @@ var catClicker = (function () {
         selectedCat: 0
     };
 
-/* ================================================================ */
-/* VIEWS                                                            */
-/* ================================================================ */
+    /* ================================================================ */
+    /* VIEWS                                                            */
+    /* ================================================================ */
 
     var navView = {
         init: function () {
@@ -70,19 +70,26 @@ var catClicker = (function () {
     };
 
     var catAreaView = {
+        init: function () {
+            document.getElementById("catPhoto").addEventListener('click', function () {
+                octopus.incrementClicker();
+            });
+        },
         render: function () {
             var activeCat = octopus.getActiveCat();
             document.getElementById("catName").innerText = activeCat.name;
-            document.getElementById("catPhoto").removeChild(document.getElementById("catPhoto").firstChild);
-            document.getElementById("catPhoto").appendChild(this.createPhoto(activeCat.imageSrc));
+            //document.getElementById("catPhoto").removeChild(document.getElementById("catPhoto").firstChild);
+            //document.getElementById("catPhoto").appendChild(this.createPhoto(activeCat.imageSrc));
+            var photo = document.getElementById("catPhoto");
+            photo.src = activeCat.imageSrc;
+
+
+
             this.updateClicker(activeCat.counter);
         },
         createPhoto: function (imageSrc) {
             var photo = document.createElement("img");
             photo.src = imageSrc;
-            photo.addEventListener('click', function () {
-                octopus.incrementClicker(model.selectedCat);
-            });
             return photo;
         },
         updateClicker: function (value) {
@@ -90,13 +97,13 @@ var catClicker = (function () {
         }
     }
 
-/* ================================================================ */
-/* CONTROLLER                                                       */
-/* ================================================================ */
+    /* ================================================================ */
+    /* CONTROLLER                                                       */
+    /* ================================================================ */
     var octopus = {
         init: function () {
             navView.init();
-
+            catAreaView.init();
             this.selectCat(0);
         },
         getActiveCat: function () {
