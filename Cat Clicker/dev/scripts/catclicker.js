@@ -63,11 +63,12 @@ var catClicker = (function () {
     };
 
     var catAreaView = {
-        render: function (name, imageSrc, counterValue) {
-            document.getElementById("catName").innerText = name;
+        render: function () {
+            var activeCat = octopus.getCat(octopus.getActiveCat());
+            document.getElementById("catName").innerText = activeCat.name;
             document.getElementById("catPhoto").removeChild(document.getElementById("catPhoto").firstChild);
-            document.getElementById("catPhoto").appendChild(this.createPhoto(imageSrc));
-            this.updateClicker(counterValue);
+            document.getElementById("catPhoto").appendChild(this.createPhoto(activeCat.imageSrc));
+            this.updateClicker(activeCat.counter);
         },
         createPhoto: function (imageSrc) {
             var photo = document.createElement("img");
@@ -91,6 +92,9 @@ var catClicker = (function () {
         getActiveCat: function () {
             return model.selectedCat;
         },
+        getCat: function(index){
+            return model.data[index];
+        },
         getCatNames: function () {
             var names = [];
             for (var i = 0; i < model.data.length; i += 1) {
@@ -103,7 +107,7 @@ var catClicker = (function () {
             model.selectedCat = id;
             navView.selectButton(model.selectedCat);
             var cat = model.data[id];
-            catAreaView.render(cat.name, cat.imageSrc, cat.counter);
+            catAreaView.render();
         },
         incrementClicker: function () {
             model.data[model.selectedCat].counter += 1;
