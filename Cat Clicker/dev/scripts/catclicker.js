@@ -1,3 +1,6 @@
+/* ================================================================ */
+/* MODELS                                                           */
+/* ================================================================ */
 var catClicker = (function () {
 
     var model = {
@@ -30,6 +33,10 @@ var catClicker = (function () {
         ],
         selectedCat: 0
     };
+
+/* ================================================================ */
+/* VIEWS                                                            */
+/* ================================================================ */
 
     var navView = {
         init: function () {
@@ -64,7 +71,7 @@ var catClicker = (function () {
 
     var catAreaView = {
         render: function () {
-            var activeCat = octopus.getCat(octopus.getActiveCat());
+            var activeCat = octopus.getActiveCat();
             document.getElementById("catName").innerText = activeCat.name;
             document.getElementById("catPhoto").removeChild(document.getElementById("catPhoto").firstChild);
             document.getElementById("catPhoto").appendChild(this.createPhoto(activeCat.imageSrc));
@@ -83,6 +90,9 @@ var catClicker = (function () {
         }
     }
 
+/* ================================================================ */
+/* CONTROLLER                                                       */
+/* ================================================================ */
     var octopus = {
         init: function () {
             navView.init();
@@ -90,10 +100,7 @@ var catClicker = (function () {
             this.selectCat(0);
         },
         getActiveCat: function () {
-            return model.selectedCat;
-        },
-        getCat: function(index){
-            return model.data[index];
+            return model.data[model.selectedCat];
         },
         getCatNames: function () {
             var names = [];
