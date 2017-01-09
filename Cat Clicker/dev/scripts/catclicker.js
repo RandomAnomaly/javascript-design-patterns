@@ -31,7 +31,8 @@ var catClicker = (function () {
                 "counter": 0
             }
         ],
-        selectedCat: 0
+        selectedCat: 0,
+        adminOpen: false
     };
 
     /* ================================================================ */
