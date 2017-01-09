@@ -72,7 +72,7 @@ var catClicker = (function () {
         createPhoto: function (imageSrc) {
             var photo = document.createElement("img");
             photo.src = imageSrc;
-            photo.addEventListener('click', function(){
+            photo.addEventListener('click', function () {
                 octopus.incrementClicker(model.selectedCat);
             });
             return photo;
@@ -88,7 +88,7 @@ var catClicker = (function () {
 
             this.selectCat(0);
         },
-        getActiveCat: function() {
+        getActiveCat: function () {
             return model.selectedCat;
         },
         getCatNames: function () {
