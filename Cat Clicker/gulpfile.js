@@ -5,7 +5,8 @@ var gulp = require('gulp'),
     usemin = require('gulp-usemin'),
     uglify = require('gulp-uglify'),
     rev = require('gulp-rev'),
-    browserSync = require('browser-sync');
+    browserSync = require('browser-sync'),
+    minifycss = require('gulp-minify-css');
 
 
 // Default task
@@ -35,6 +36,7 @@ gulp.task('jshint', function () {
 gulp.task('uglify', ['jshint'], function () {
     return gulp.src('./dev/**/*.html')
         .pipe(usemin({
+            css: [minifycss(),rev()],
             js: [uglify(), rev()]
         }))
         .pipe(gulp.dest('dist/'));
