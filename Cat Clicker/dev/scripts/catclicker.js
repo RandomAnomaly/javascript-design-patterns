@@ -99,6 +99,9 @@ var catClicker = (function () {
                 var counter = document.getElementById("catTickerTextbox").value;
                 octopus.submitAdmin(name, counter, imageSrc);
             });
+            document.getElementById("cancelButton").addEventListener('click', function(){
+                octopus.toggleAdminDisplay();
+            });
         },
         // Render the currently selected cat, updates the name, clicker and photo from the json
         render: function () {
@@ -168,7 +171,7 @@ var catClicker = (function () {
             return model.adminOpen;
         },
         cancelAdmin: function () {
-
+            this.toggleAdminDisplay();
         },
         // Updates the model with the values in the admin form
         submitAdmin: function (name, counter, imageSrc) {
