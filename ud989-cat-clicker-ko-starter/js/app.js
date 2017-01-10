@@ -69,7 +69,6 @@ var ViewModel = function () {
     };
 
     this.changeCat = function (cat) {
-        console.log(cat);
         self.currentCat(cat);
     }
 }
