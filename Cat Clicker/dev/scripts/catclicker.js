@@ -85,6 +85,12 @@ var catClicker = (function () {
             document.getElementById("adminButton").addEventListener('click', function () {
                 octopus.toggleAdminDisplay();
             });
+            document.getElementById("submitButton").addEventListener('click', function(){
+                var name = document.getElementById("catNameTextbox").value;
+                var imageSrc = document.getElementById("catPhotoTextbox").value;
+                var counter = document.getElementById("catTickerTextbox").value;
+                octopus.submitAdmin(name, counter, imageSrc);
+            });
         },
         // Render the currently selected cat, updates the name, clicker and photo from the json
         render: function () {
@@ -93,7 +99,7 @@ var catClicker = (function () {
             var photo = document.getElementById("catPhoto");
             photo.src = activeCat.imageSrc;
             this.updateClicker(activeCat.counter);
-            
+
             document.getElementById("formAdminArea").hidden = !octopus.getAdminDisplayStatus();
             document.getElementById("catNameTextbox").value = activeCat.name;
             document.getElementById("catPhotoTextbox").value = activeCat.imageSrc;
@@ -104,7 +110,6 @@ var catClicker = (function () {
         updateClicker: function (value) {
             document.getElementById("catTicker").innerText = value;
         }
-
     }
 
     /* ================================================================ */
@@ -154,7 +159,18 @@ var catClicker = (function () {
         },
         cancelAdmin: function () {
 
+        },
+        // Updates the model with the values in the admin form
+        submitAdmin: function (name, counter, imageSrc) {
+            var cat = model.data[model.selectedCat];
+            cat.name = name;
+            cat.counter = counter;
+            cat.imageSrc = imageSrc;
+
+            model.data[model.selectedCat] = cat;
+            this.toggleAdminDisplay();
         }
+
     };
     // kick everything off (:
     octopus.init();
