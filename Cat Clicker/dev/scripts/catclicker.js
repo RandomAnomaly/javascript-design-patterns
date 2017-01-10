@@ -45,11 +45,7 @@ var catClicker = (function () {
     var navView = {
         // Creates a set of li buttons from the cat names and attaches it to the DOM
         init: function () {
-            var names = octopus.getCatNames();
-            for (var i = 0; i < names.length; i += 1) {
-                var button = this.createButton(names[i]);
-                document.getElementById("navbar").appendChild(this.createButton(names[i], i));
-            }
+            this.render();
         },
         // Sets the given button to inactive
         deselectButton: function (id) {
@@ -72,6 +68,18 @@ var catClicker = (function () {
                 octopus.selectCat(id);
             })
             return li;
+        },
+
+        render: function () {
+            // clear the buttons first
+            document.getElementById("navbar").innerHTML = "";
+
+            var names = octopus.getCatNames();
+            for (var i = 0; i < names.length; i += 1) {
+                document.getElementById("navbar").appendChild(this.createButton(names[i], i));
+            }
+
+
         }
     };
 
@@ -85,7 +93,7 @@ var catClicker = (function () {
             document.getElementById("adminButton").addEventListener('click', function () {
                 octopus.toggleAdminDisplay();
             });
-            document.getElementById("submitButton").addEventListener('click', function(){
+            document.getElementById("submitButton").addEventListener('click', function () {
                 var name = document.getElementById("catNameTextbox").value;
                 var imageSrc = document.getElementById("catPhotoTextbox").value;
                 var counter = document.getElementById("catTickerTextbox").value;
@@ -169,6 +177,9 @@ var catClicker = (function () {
 
             model.data[model.selectedCat] = cat;
             this.toggleAdminDisplay();
+            navView.render();
+
+            this.selectCat(model.selectedCat);
         }
 
     };
