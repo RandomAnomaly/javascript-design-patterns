@@ -69,7 +69,7 @@ var catClicker = (function () {
             })
             return li;
         },
-
+        // redraw the navbar onscreen
         render: function () {
             // clear the buttons first
             document.getElementById("navbar").innerHTML = "";
@@ -113,6 +113,8 @@ var catClicker = (function () {
             document.getElementById("catPhotoTextbox").value = activeCat.imageSrc;
             document.getElementById("catTickerTextbox").value = activeCat.counter;
 
+            var adminButton = document.getElementById("adminButton");
+            !octopus.getAdminDisplayStatus() ? adminButton.style.display = "" : adminButton.style.display = "none";
         },
         // Sets the clicker on screen to the given value
         updateClicker: function (value) {
